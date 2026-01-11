@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2><i class="bi bi-search"></i> 의약품 검색</h2>
+    <p class="lead">성분명 또는 제품명으로 의약품을 검색하세요</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" action="{% url 'medicine:search' %}">
+            <div class="input-group">
+                {{ form.query }}
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> 검색
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if query %}
+<div class="mb-3">
+    <h5>"{{ query }}" 검색 결과 ({{ medicines.paginator.count }}건)</h5>
+</div>
+
+{% if medicines %}
+<div class="row">
+    {% for medicine in medicines %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ medicine.product_name }}</h5>
+                <p class="card-text">
+                    <strong>성분명:</strong> {{ medicine.ingredient_name }}<br>
+                    <strong>제조사:</strong> {{ medicine.manufacturer }}<br>
+                    <strong>효능:</strong> <span class="badge bg-primary">{{ medicine.get_efficacy_display }}</span>
+                </p>
+                <a href="{% url 'medicine:detail' medicine.pk %}" class="btn btn-sm btn-outline-primary">
+                    상세정보
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if medicines.has_other_pages %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if medicines.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?query={{ query }}&page={{ medicines.previous_page_number }}">이전</a>
+        </li>
+        {% endif %}
+        
+        {% for num in medicines.paginator.page_range %}
+        {% if medicines.number == num %}
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        {% elif num > medicines.number|add:'-3' and num < medicines.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?query={{ query }}&page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        
+        {% if medicines.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?query={{ query }}&page={{ medicines.next_page_number }}">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle"></i> 검색 결과가 없습니다.
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

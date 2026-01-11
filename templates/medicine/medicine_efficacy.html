@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2><i class="bi bi-filter"></i> 효능별 의약품</h2>
+    <p class="lead">증상에 맞는 의약품을 찾아보세요</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">효능 카테고리 선택</h5>
+        <div class="d-flex flex-wrap gap-2">
+            {% for code, name in efficacy_choices %}
+            <a href="?efficacy={{ code }}" 
+               class="btn {% if selected_efficacy == code %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                {{ name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if selected_efficacy %}
+<div class="mb-3">
+    <h5>
+        {% for code, name in efficacy_choices %}
+            {% if code == selected_efficacy %}
+                {{ name }} ({{ medicines.paginator.count }}건)
+            {% endif %}
+        {% endfor %}
+    </h5>
+</div>
+
+{% if medicines %}
+<div class="row">
+    {% for medicine in medicines %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ medicine.product_name }}</h5>
+                <p class="card-text">
+                    <strong>성분명:</strong> {{ medicine.ingredient_name }}<br>
+                    <strong>제조사:</strong> {{ medicine.manufacturer }}<br>
+                    <strong>효능/효과:</strong> {{ medicine.efficacy|truncatewords:10 }}
+                </p>
+                <a href="{% url 'medicine:detail' medicine.pk %}" class="btn btn-sm btn-outline-primary">
+                    상세정보
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if medicines.has_other_pages %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if medicines.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?efficacy={{ selected_efficacy }}&page={{ medicines.previous_page_number }}">이전</a>
+        </li>
+        {% endif %}
+        
+        {% for num in medicines.paginator.page_range %}
+        {% if medicines.number == num %}
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        {% elif num > medicines.number|add:'-3' and num < medicines.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?efficacy={{ selected_efficacy }}&page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        
+        {% if medicines.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?efficacy={{ selected_efficacy }}&page={{ medicines.next_page_number }}">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> 해당 효능의 의약품이 없습니다.
+</div>
+{% endif %}
+
+{% else %}
+<div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> 효능 카테고리를 선택해주세요.
+</div>
+{% endif %}
+{% endblock %}
