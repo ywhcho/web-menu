@@ -11,6 +11,12 @@ class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
     redirect_authenticated_user = True
     
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': '사용자명을 입력하세요'})
+        form.fields['password'].widget.attrs.update({'class': 'form-control', 'placeholder': '비밀번호를 입력하세요'})
+        return form
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = '로그인'
