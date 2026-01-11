@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2><i class="bi bi-clipboard-data"></i> 의약정보</h2>
+    <p class="lead">의약품 정보를 검색하고 확인하세요</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-search text-primary"></i> 성분명 검색
+                </h5>
+                <p class="card-text">의약품의 성분명이나 제품명으로 검색하세요</p>
+                <a href="{% url 'medicine:search' %}" class="btn btn-primary">검색하기</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-filter text-success"></i> 효능별 보기
+                </h5>
+                <p class="card-text">증상에 맞는 의약품을 카테고리별로 찾아보세요</p>
+                <a href="{% url 'medicine:efficacy' %}" class="btn btn-success">효능별 보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if medicines %}
+<div class="mb-4">
+    <h4>최근 등록된 의약품</h4>
+</div>
+
+<div class="row">
+    {% for medicine in medicines %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ medicine.product_name }}</h5>
+                <p class="card-text">
+                    <small class="text-muted">
+                        <i class="bi bi-tag"></i> {{ medicine.ingredient_name }}<br>
+                        <i class="bi bi-building"></i> {{ medicine.manufacturer }}<br>
+                        <i class="bi bi-capsule"></i> {{ medicine.get_efficacy_display }}
+                    </small>
+                </p>
+                <a href="{% url 'medicine:detail' medicine.pk %}" class="btn btn-sm btn-outline-primary">
+                    자세히 보기
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> 등록된 의약품이 없습니다.
+</div>
+{% endif %}
+{% endblock %}

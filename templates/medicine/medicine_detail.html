@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'medicine:list' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> 목록으로
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">{{ medicine.product_name }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong><i class="bi bi-tag"></i> 성분명</strong>
+            </div>
+            <div class="col-md-9">
+                {{ medicine.ingredient_name }}
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong><i class="bi bi-building"></i> 제조사</strong>
+            </div>
+            <div class="col-md-9">
+                {{ medicine.manufacturer }}
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong><i class="bi bi-capsule"></i> 효능 분류</strong>
+            </div>
+            <div class="col-md-9">
+                <span class="badge bg-primary">{{ medicine.get_efficacy_display }}</span>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="mb-4">
+            <h5><i class="bi bi-heart-pulse"></i> 효능/효과</h5>
+            <div class="p-3 bg-light rounded" style="white-space: pre-wrap;">{{ medicine.efficacy }}</div>
+        </div>
+        
+        <div class="mb-4">
+            <h5><i class="bi bi-clipboard-pulse"></i> 용법/용량</h5>
+            <div class="p-3 bg-light rounded" style="white-space: pre-wrap;">{{ medicine.dosage }}</div>
+        </div>
+        
+        <div class="mb-4">
+            <h5><i class="bi bi-exclamation-triangle text-warning"></i> 주의사항</h5>
+            <div class="p-3 bg-light rounded border-start border-warning border-5" style="white-space: pre-wrap;">{{ medicine.precautions }}</div>
+        </div>
+        
+        <div class="text-muted">
+            <small>
+                <i class="bi bi-calendar"></i> 등록일: {{ medicine.created_at|date:"Y-m-d H:i" }}
+            </small>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'medicine:list' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-list"></i> 목록
+        </a>
+        <a href="{% url 'medicine:search' %}?query={{ medicine.ingredient_name }}" class="btn btn-outline-primary">
+            <i class="bi bi-search"></i> 같은 성분 검색
+        </a>
+    </div>
+</div>
+{% endblock %}

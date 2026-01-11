@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'board:list' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> 목록으로
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header bg-light">
+        <h3 class="mb-2">{{ post.title }}</h3>
+        <div class="text-muted">
+            <small>
+                <i class="bi bi-person"></i> {{ post.author.username }} | 
+                <i class="bi bi-calendar"></i> {{ post.created_at|date:"Y-m-d H:i" }} | 
+                <i class="bi bi-eye"></i> 조회 {{ post.views }}
+                {% if post.created_at != post.updated_at %}
+                | <i class="bi bi-pencil"></i> 수정 {{ post.updated_at|date:"Y-m-d H:i" }}
+                {% endif %}
+            </small>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="content" style="min-height: 200px; white-space: pre-wrap;">{{ post.content }}</div>
+    </div>
+    <div class="card-footer bg-light">
+        <div class="d-flex justify-content-between">
+            <div>
+                {% if user == post.author %}
+                <a href="{% url 'board:edit' post.pk %}" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> 수정
+                </a>
+                <a href="{% url 'board:delete' post.pk %}" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> 삭제
+                </a>
+                {% endif %}
+            </div>
+            <div>
+                <a href="{% url 'board:list' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-list"></i> 목록
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

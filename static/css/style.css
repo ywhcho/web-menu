@@ -1,0 +1,185 @@
+/* Custom Styles for Web Menu - Pharmaceutical Company Website */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar customization */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.2s;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #fff;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Table improvements */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+    cursor: pointer;
+}
+
+/* Button customizations */
+.btn {
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Alert message styling */
+.alert {
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: #28a745;
+}
+
+.alert-danger,
+.alert-error {
+    border-left-color: #dc3545;
+}
+
+.alert-warning {
+    border-left-color: #ffc107;
+}
+
+.alert-info {
+    border-left-color: #17a2b8;
+}
+
+/* Form improvements */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Jumbotron replacement for Bootstrap 5 */
+.jumbotron {
+    background-color: #f8f9fa;
+    border-radius: 0.3rem;
+}
+
+/* Footer styling */
+footer {
+    margin-top: auto;
+}
+
+/* Pagination */
+.pagination .page-link {
+    color: #0d6efd;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Content area whitespace preservation */
+.content {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Badge styling */
+.badge {
+    padding: 0.35em 0.65em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+}
+
+/* Loading spinner (optional) */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.2em;
+}
+
+/* Custom icons size */
+.bi {
+    vertical-align: -0.125em;
+}
+
+/* Card title in lists */
+.card-title {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Table responsive wrapper */
+.table-responsive {
+    border-radius: 0.25rem;
+}
+
+/* Form text muted */
+.form-text {
+    font-size: 0.875em;
+    color: #6c757d;
+}
+
+/* Error text */
+.text-danger {
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}

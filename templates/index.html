@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded-3 mb-4">
+    <div class="text-center">
+        <h1 class="display-4">의약품 안전사용 전문회사</h1>
+        <p class="lead">의약품의 안전한 사용과 정보 제공으로 국민 건강 증진에 기여합니다</p>
+        <hr class="my-4">
+        <p>정확한 의약품 정보를 제공하고 올바른 사용법을 안내합니다</p>
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg me-2" href="{% url 'medicine:search' %}" role="button">
+                <i class="bi bi-search"></i> 의약품 검색
+            </a>
+            <a class="btn btn-outline-primary btn-lg" href="{% url 'about' %}" role="button">
+                <i class="bi bi-info-circle"></i> 회사 소개
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-clipboard-data display-4 text-primary mb-3"></i>
+                <h5 class="card-title">의약품 정보</h5>
+                <p class="card-text">다양한 의약품의 효능, 용법, 주의사항을 확인하세요</p>
+                <a href="{% url 'medicine:list' %}" class="btn btn-outline-primary">자세히 보기</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-search display-4 text-success mb-3"></i>
+                <h5 class="card-title">성분명 검색</h5>
+                <p class="card-text">성분명으로 의약품을 빠르게 찾아보세요</p>
+                <a href="{% url 'medicine:search' %}" class="btn btn-outline-success">검색하기</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-chat-left-text display-4 text-info mb-3"></i>
+                <h5 class="card-title">게시판</h5>
+                <p class="card-text">의약품 관련 정보를 공유하고 소통하세요</p>
+                <a href="{% url 'board:list' %}" class="btn btn-outline-info">게시판 가기</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <h3 class="mb-4">주요 서비스</h3>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-4"></i>
+                <div>
+                    <h5>의약품 정보 제공</h5>
+                    <p class="text-muted">제품명, 성분명, 효능, 용법 등 상세한 의약품 정보</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-4"></i>
+                <div>
+                    <h5>안전사용 가이드</h5>
+                    <p class="text-muted">의약품의 올바른 사용법과 주의사항 안내</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-4"></i>
+                <div>
+                    <h5>효능별 분류</h5>
+                    <p class="text-muted">증상에 맞는 의약품을 쉽게 찾을 수 있는 분류 시스템</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-4"></i>
+                <div>
+                    <h5>커뮤니티</h5>
+                    <p class="text-muted">사용자 간 정보 공유 및 질문답변 게시판</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
